@@ -44,8 +44,9 @@ func (wp *workerPool) Start(ctx context.Context) {
 	//
 	// Starts numWorkers of goroutines, wait until all jobs are done.
 	// Remember to closed the result channel before exit.
+	wp.wg.Add(wp.numWorkers)
 	for i:= 0; i < wp.numWorkers; i++ {
-		wp.wg.Add(1)
+		//wp.wg.Add(1)
 		go wp.run(ctx)
 	}
 	wp.wg.Wait()
