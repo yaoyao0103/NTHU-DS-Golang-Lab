@@ -11,7 +11,7 @@ jobs:
       with:
         go-version: 1.21
     - name: get dependencies
-      run:
+      run: |
        go get github.com/onsi/ginkgo
        go get github.com/onsi/gomega/...
        go mod tidy
