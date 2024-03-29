@@ -66,7 +66,7 @@ func (wp *workerPool) run(ctx context.Context) {
 	//
 	// Keeps fetching task from the task channel, do the task,
 	// then makes sure to exit if context is done.
-	defer wp.wg.Done()
+	defer wp.wg.Done();
 	for{
 		select{
 		case task, ok := <- wp.tasks:
@@ -74,10 +74,15 @@ func (wp *workerPool) run(ctx context.Context) {
 				return
 			}
 			result := task.Func(task.Args...)
-			wp.results <- result
+			select{
+			case wp.results <- result:
+			case <- ctx.Done():
+				return
+			}
+			//wp.results <- result
 		case <- ctx.Done():
 			return
-		default: 
+		//default: 
 		}
 	}
 }
