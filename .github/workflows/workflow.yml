@@ -10,8 +10,6 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: 1.21.7
-    - name: get dependencies
-      run: go mod tidy
     - name: test
       run: go test -race ./...
 
