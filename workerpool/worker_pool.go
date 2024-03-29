@@ -77,7 +77,7 @@ func (wp *workerPool) run(ctx context.Context) {
 			wp.results <- result
 		case <- ctx.Done():
 			return
-		default:
+		default: 
 		}
 	}
 }
