@@ -2,14 +2,14 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: checkout
       uses: actions/checkout@v2
     - name: setup-go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.21
+        go-version: 1.21.7
     - name: get dependencies
       run: |
        go get github.com/onsi/ginkgo
