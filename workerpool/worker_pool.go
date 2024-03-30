@@ -74,15 +74,12 @@ func (wp *workerPool) run(ctx context.Context) {
 				return
 			}
 			result := task.Func(task.Args...)
-			select{
-			case wp.results <- result:
-			case <- ctx.Done():
-				return
-			}
-			//wp.results <- result
+			wp.results <- result
+		}
+		select{
 		case <- ctx.Done():
 			return
-		//default: 
+		default: 
 		}
 	}
 }
